@@ -4,8 +4,10 @@ const router = express.Router();
 const authController = require('../controllers/authControllers');
 const courseController = require('../controllers/courseController');
 
-// router para las vistas
 
+
+
+// router para las vistas
 router.get('/', authController.isAuthenticated, (req, res)=>{
     if(req.user.rol == "admin"){
         res.render('index', {user:req.user, data: req.courses});
