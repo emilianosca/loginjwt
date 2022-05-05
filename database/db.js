@@ -23,6 +23,7 @@ module.exports = conexion;
 
 
 
+
 // -- creating database
 // CREATE DATABASE iepam;
 
@@ -86,3 +87,20 @@ module.exports = conexion;
 
 // -- to describe table
 // DESCRIBE usuario;
+
+// // inserts
+// USE iepam;
+// INSERT INTO curso(id_usuario,nombre,num_lecciones,imagen)
+// VALUES (1, "introduccion", 0, "https://factorcapitalhumano.com/wp-content/uploads/2021/03/plataforma-cursos-capacitacion-gratuitos.jpg");
+ 
+// INSERT INTO curso(id_usuario,nombre,num_lecciones,imagen)
+// VALUES (1,"nodejs",0,"https://s3-us-west-2.amazonaws.com/devcodepro/media/tutorials/instalacion-de-nodejs-en-ubuntu-t1.jpg");
+
+// INSERT INTO curso(id_usuario,nombre,num_lecciones,imagen)
+// VALUES (1,"outlook",0,"https://gloryittechnologies.com/img/help-center/96/microsoft-outlook-2019-review.jpg");
+
+// INSERT INTO curso(id_usuario,nombre,num_lecciones,imagen)
+// VALUES (1,"FrontEnd Web Developer",0,"https://3cthinkers.com/en/wp-content/uploads/2017/03/dynamicpages.jpeg");
+
+// INSERT INTO curso(id_usuario,nombre,num_lecciones,imagen)
+// VALUES (1,"MySql",0,"https://edteam-media.s3.amazonaws.com/courses/original/3aa59acc-3472-4875-b9c6-216825be755b.png");
