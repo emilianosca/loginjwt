@@ -1,60 +1,79 @@
+const conexion = require('../database/db');
+
+console.log("---- get into customerController.js  ---- ")
+
 // test archive
 const controller = {};
 
-console.log("get into customerController.js  aaaaa")
 controller.list = (req, res) => {
-  req.getConnection((err, conn) => {
-    conn.query('SELECT * FROM curso', (err, curso) => {
-     if (err) {
-      res.json(err);
-     }
-     res.render('index', {
-        data: curso
-     });
-    });
-  });
+  // req.getConnection((err, conn) => {
+  //   conn.query('SELECT * FROM curso', (err, customers) => {
+  //    if (err) {
+  //     res.json(err);
+  //    }
+  //    res.render('customers', {
+  //       data: customers
+  //    });
+  //   });
+  // });
+ 
+    res.send('hello world');
+ 
 };
 
 controller.save = (req, res) => {
-  const data = req.body;
-  console.log(req.body)
-  req.getConnection((err, connection) => {
-    const query = connection.query('INSERT INTO curso set ?', data, (err, curso) => {
-      console.log(curso)
-      res.redirect('/');
-    })
-  })
+  console.log("Connected to save!");
+  const nombre = req.body.nombre;
+  const imagen = req.body.imagen;
+  
+  // const data = req.body;
+  console.log("this is req.body " + req);
+  
+  conexion.query('INSERT INTO curso set ?',{ id_usuario:2, nombre:nombre, num_lecciones:0, imagen:imagen}, (err, result)=>{
+    
+    console.log("this is data -> " + nombre)
+    console.log("this is imagen -> " + imagen)
+    res.redirect('/');
+});
+     
+    
+  
+  // res.send('hello world into add');
 };
 
+
 controller.edit = (req, res) => {
-  const { id } = req.params;
-  req.getConnection((err, conn) => {
-    conn.query("SELECT * FROM curso WHERE id = ?", [id], (err, rows) => {
-      res.render('customers_edit', {
-        data: rows[0]
-      })
-    });
-  });
+  // const { id } = req.params;
+  // req.getConnection((err, conn) => {
+  //   conn.query("SELECT * FROM curso WHERE id = ?", [id], (err, rows) => {
+  //     res.render('customers_edit', {
+  //       data: rows[0]
+  //     })
+  //   });
+  // });
+  res.send('hello world into edit');
 };
 
 controller.update = (req, res) => {
-  const { id } = req.params;
-  const newCustomer = req.body;
-  req.getConnection((err, conn) => {
+  // const { id } = req.params;
+  // const newCustomer = req.body;
+  // req.getConnection((err, conn) => {
 
-  conn.query('UPDATE curso set ? where id = ?', [newCustomer, id], (err, rows) => {
-    res.redirect('/');
-  });
-  });
+  // conn.query('INSERT INTO curso id_usuario=1 ,nombre=Rodo,num_lecciones=10,imagen="https://s3-us-west-2.amazonaws.com/devcodepro/media/tutorials/instalacion-de-nodejs-en-ubuntu-t1.jpg";', [newCustomer, id], (err, rows) => {
+  //   res.redirect('/');
+  // });
+  // });
+  res.send('hello world');
 };
 
 controller.delete = (req, res) => {
-  const { id } = req.params;
-  req.getConnection((err, connection) => {
-    connection.query('DELETE FROM curso WHERE id = ?', [id], (err, rows) => {
-      res.redirect('/');
-    });
-  });
+  // const { id } = req.params;
+  // req.getConnection((err, connection) => {
+  //   connection.query('DELETE FROM customer WHERE id = ?', [id], (err, rows) => {
+  //     res.redirect('/');
+  //   });
+  // });
+  res.send('hello world');
 }
 
 module.exports = controller; 

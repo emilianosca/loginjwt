@@ -1,0 +1,72 @@
+// test archive
+const controller = require('../database/db');
+
+console.log("get into customerController.js  aaaaa")
+controller.list = (req, res) => {
+    console.log("get into customerController.js  list")
+  req.getConnection((err, conn) => {
+    conn.query('SELECT * FROM curso', (err, curso) => {
+     if (err) {
+      res.json(err);
+     }
+     res.render('index', {
+        curso: curso
+     });
+    });
+  });
+};
+
+controller.save = (req, res) => {
+    console.log("-----------------------------------------------------")
+    console.log("get into customerController.js  save")
+  const data = req.body;
+  console.log(req.body)
+  req.getConnection((err, connection) => {
+    const query = connection.query('INSERT INTO curso set ?', data, (err, curso) => {
+      console.log("this is curso?¿ " + curso)
+      res.redirect('/');
+    })
+  })
+  console.log("OUT FROM customerController.js  save")
+  console.log("-----------------------------------------------------")
+};
+
+controller.edit = (req, res) => {
+  console.log("get into customerController.js  edit")
+  const { id_curso } = req.params;
+  req.getConnection((err, conn) => {
+    conn.query("SELECT * FROM curso WHERE id_curso = ?", [id_curso], (err, rows) => {
+      // console.log("this is data?¿ " + id_curso)
+      res.render('../views/customers_edit.ejs', {
+        data: rows[0]
+      })
+    });
+  });
+};
+
+controller.update = (req, res) => {
+  console.log("get into customerController.js  update")
+  const { id_curso } = req.params;
+  const admin = req.body;
+  console.log("Get into function update")
+  req.getConnection((err, conn) => {
+
+  conn.query('UPDATE curso set ? where id_curso = ?', [admin, id_curso], (err, rows) => {
+    res.redirect('/');
+  });
+  });
+};
+
+controller.delete = (req, res) => {
+  const {id_curso } = req.params;
+  console.log("Get into function delete")
+  req.getConnection((err, connection) => {
+    connection.query('DELETE FROM curso WHERE id_curso = ?', [id_curso], (err, rows) => {
+      res.redirect('/');
+    });
+  });
+}
+
+
+console.log("get at the end of customerController.js  aaaaa")
+module.exports = controller; 

@@ -45,7 +45,7 @@ const myConnection = require('express-myconnection');
 
 
 // importing routes
-const customers = require('./routes/customers');
+const customers = require('./routes/customers.js');
 const { urlencoded } = require('express');
 // const userRoutes = require('./routes/users');
  
@@ -57,4 +57,15 @@ app.set('views', path.join(__dirname, 'views'));
 
 // middlewares
 app.use(morgan('dev'));
+app.use(myConnection(mysql2, {
+    host: '127.0.0.1',
+    user: 'root',
+    password: 'qwerty1234',
+    port: 3306,
+    database: 'iepam'
+}, 'single'));
 app.use(express.urlencoded({ extended: false })); // para que funcione el formulario
+
+
+app.use('/', customers);
+app.use(express.static(path.join(__dirname, 'public')));
