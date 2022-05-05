@@ -55,8 +55,8 @@
                       <!-- <td><%= data[i].num_lecciones %></td> -->
                       <td><%= data[i].imagen %></td>
                       <td>
-                        <a href="/update/ <%= data[i].id %>" class="btn btn-info">Editar</a>
-                        <a href="/delete/ <%= data[i].id %>" class="btn btn-danger">Delete</a>
+                        <a href="/update/<%= data[i].id_curso %>" class="btn btn-info">Editar</a>
+                        <a href="/delete/<%= data[i].id_curso %>" class="btn btn-danger">Delete</a>
                       </td>
                     </tr>
                   <% } %>
