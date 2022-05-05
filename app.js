@@ -31,6 +31,6 @@ app.use((req, res, next)=>{
     next();
 });
 
-app.listen(4000, ()=>{
-    console.log('SERVER UP running in http://localhost:4000');
+app.listen(3000, ()=>{
+    console.log('SERVER UP running in http://localhost:3000');
 });
