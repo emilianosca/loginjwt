@@ -34,3 +34,27 @@ app.use((req, res, next)=>{
 app.listen(3000, ()=>{
     console.log('SERVER UP running in http://localhost:3000');
 });
+
+
+// new added
+
+const path = require('path');
+const morgan = require('morgan');
+const mysql2 = require('mysql2')
+const myConnection = require('express-myconnection');
+
+
+// importing routes
+const customers = require('./routes/customers');
+const { urlencoded } = require('express');
+// const userRoutes = require('./routes/users');
+ 
+
+// settings
+app.set('port', (process.env.PORT || 3000));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// middlewares
+app.use(morgan('dev'));
+app.use(express.urlencoded({ extended: false })); // para que funcione el formulario
