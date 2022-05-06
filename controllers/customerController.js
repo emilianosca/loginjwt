@@ -6,19 +6,17 @@ console.log("---- get into customerController.js  ---- ")
 const controller = {};
 
 controller.list = (req, res) => {
-  // req.getConnection((err, conn) => {
-  //   conn.query('SELECT * FROM curso', (err, customers) => {
-  //    if (err) {
-  //     res.json(err);
-  //    }
-  //    res.render('customers', {
-  //       data: customers
-  //    });
-  //   });
-  // });
- 
-    res.send('hello world');
- 
+  
+    conexion.query('SELECT * FROM curso', (err, curso) => {
+     if (err) {
+      res.json(err);
+     }
+     res.render('curso', {
+        data: curso
+     });
+    });
+  
+    // res.send('hello world');
 };
 
 controller.save = (req, res) => {
@@ -43,46 +41,36 @@ controller.save = (req, res) => {
 
 
 controller.edit = (req, res) => {
+  console.log(" ");
+  console.log("---- Connected to edit! ---- ");
 
-// ---- 
-// console.log("Connected to save!");
-// const nombre = req.body.nombre;
-// const imagen = req.body.imagen;
+  const {nombre} = req.params;
+  const {id_curso} = req.params;
+  const {imagen} = req.params;
+  console.log("this is imagen -> " + imagen);
 
-// // const data = req.body;
-// console.log("this is req.body " + req);
+  console.log(" this is nombre -> " + nombre + " this is imagen -> " + imagen + " this is id_curso -> " + id_curso); 
 
-// conexion.query('INSERT INTO curso set ?',{ id_usuario:2, nombre:nombre, num_lecciones:0, imagen:imagen}, (err, result)=>{
+  res.render('customers_edit', {
+    data: id_curso,
+    title: nombre, 
+    imagen: imagen,
+   });
+
   
-//   console.log("this is data -> " + nombre)
-//   console.log("this is imagen -> " + imagen)
-//   res.redirect('/');
-
-// ---
-console.log(" ");
-console.log("---- Connected to edit! ---- ");
-
-  // const { id } = req.body;
-  // req.getConnection((err, conn) => {
-  //   conn.query("SELECT * FROM curso WHERE id = ?", [id], (err, rows) => {
-  //     res.render('customers_edit', {
-  //       data: rows[0]
-  //     })
-  //   });
-  // });
-  res.send('hello world into edit');
 };
 
 controller.update = (req, res) => {
-  // const { id } = req.params;
-  // const newCustomer = req.body;
-  // req.getConnection((err, conn) => {
+  const { id } = req.params;
+  const newCustomer = req.body;
 
-  // conn.query('INSERT INTO curso id_usuario=1 ,nombre=Rodo,num_lecciones=10,imagen="https://s3-us-west-2.amazonaws.com/devcodepro/media/tutorials/instalacion-de-nodejs-en-ubuntu-t1.jpg";', [newCustomer, id], (err, rows) => {
-  //   res.redirect('/');
-  // });
-  // });
-  res.send('hello world update');
+  console.log("this is id -> " + id + " and this is newCustomer -> " + newCustomer); 
+
+  conexion.query('UPDATE curso set ? where id = ?', [newCustomer, id], (err, rows) => {
+  
+    res.redirect('/');
+
+  });
 };
 
 controller.delete = (req, res) => {
